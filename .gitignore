@@ -19,3 +19,8 @@ env/
 
 # Data cache
 data/
+
+# Packaging artifacts
+*.egg-info/
+dist/
+build/
