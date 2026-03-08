@@ -138,7 +138,7 @@ def render_sidebar() -> dict:
         )
 
         if len(tickers) == 0:
-            st.warning("Please select at least one ticker")
+            st.warning("Please select at least one ticker", icon=":material/info:")
             st.stop()
 
         default_start = pd.to_datetime("2020-01-01")
@@ -152,7 +152,10 @@ def render_sidebar() -> dict:
     else:
         uploaded_file = st.sidebar.file_uploader("Upload market data (CSV)", type=["csv"])
         if uploaded_file is None:
-            st.info("Please upload a CSV file with dates as index and tickers as columns.")
+            st.info(
+                "Please upload a CSV file with dates as index and tickers as columns.",
+                icon=":material/info:",
+            )
             st.stop()
 
         try:

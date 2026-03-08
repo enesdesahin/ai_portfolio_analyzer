@@ -99,7 +99,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.markdown('<hr style="margin-top: 15px; margin-bottom: 25px; border: 0; height: 1px; background-color: #e6e6e6;" />', unsafe_allow_html=True)
 
-if "portfolio" not in st.session_state:
+# Track whether the user has already attempted a backtest at least once.
+if "backtest_attempted" not in st.session_state:
+    st.session_state["backtest_attempted"] = False
+
+# Update click state before rendering the intro warning.
+if cfg["create_portfolio_clicked"]:
+    st.session_state["backtest_attempted"] = True
+
+if "portfolio" not in st.session_state and not st.session_state["backtest_attempted"]:
     st.warning("Choose your parameters and click on **Run backtest**", icon=":material/info:")
 
 # 3. Resolve weights for equal-weight / dynamic strategies
@@ -113,7 +121,7 @@ if strategy_source == "Equal-weight":
     weights_vector = np.array([1.0 / n] * n)
 elif strategy_source != "Manual weights":
     if strategy_source == "Upload script" and strategy_func is None:
-        st.warning("Please upload a valid strategy script.")
+        st.warning("Please upload a valid strategy script.", icon=":material/info:")
         cfg["valid_weights"] = False
 
 # 4. Run backtest
