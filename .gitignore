@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.venv/
+env/
+
+# macOS
+.DS_Store
+
+# Streamlit
+.streamlit/secrets.toml
+# Note: .streamlit/config.toml is committed as it contains theme settings
+
+# Environment variables
+.env
+
+# Data cache
+data/
